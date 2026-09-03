@@ -1,10 +1,8 @@
 # ESP32 Motor Driver Firmware (micro-ROS)
 
-Firmware for the ESP32 that drives the two real PuzzleBot DC gearmotors and
+Firmware for the ESP32 that drives two DC motors and
 closes the loop with ROS 2 via **micro-ROS**. It is the hardware counterpart
-to the simulation in [`../puzzlebot_control`](../puzzlebot_control) — it lets
-the same `/cmd_vel`-driven pipeline run on the physical robot instead of the
-Gazebo/kinematic simulator.
+to the simulation in [`../puzzlebot_control`](../puzzlebot_control).
 
 ## What it does
 

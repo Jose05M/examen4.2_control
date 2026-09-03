@@ -61,7 +61,7 @@ cd ~/pb_ws && colcon build --packages-select puzzlebot_control
 source install/setup.bash
 
 # 3. Run (3 terminals)
-ros2 launch puzzlebot_control sim.launch.py       # or gazebo.launch.py for full Gazebo/RViz
+ros2 launch puzzlebot_control gazebo.launch.py
 ros2 run puzzlebot_control teleop_keyboard         # drive it, switch controllers with 1-5
 xdg-open http://localhost:8080                     # live dashboard
 ```

@@ -39,6 +39,8 @@ class BaseController(Node):
         self.declare_parameter('goal_y', 1.5)
         self.declare_parameter('default_active', True)
         self.declare_parameter('waypoint_tolerance', 0.15)
+        self.declare_parameter('wheel_base', 0.19)
+        self.declare_parameter('wheel_radius', 0.05)
 
         self.v_max = self.get_parameter('max_linear_vel').value
         self.w_max = self.get_parameter('max_angular_vel').value
@@ -46,6 +48,9 @@ class BaseController(Node):
         self.wp_tol = self.get_parameter('waypoint_tolerance').value
         rate = self.get_parameter('control_rate').value
 
+        self.L = self.get_parameter('wheel_base').value
+        self.r = self.get_parameter('wheel_radius').value
+        self.v_real = 0.0
         self.w_real = 0.0  # Angular velocity reported by the ESP32
 
         # State
@@ -187,7 +192,6 @@ class BaseController(Node):
         self.ctrl_time += self.dt
         dist, angle_err, dx, dy = self.get_errors()
         self._advance_waypoint(dist)
-        angle_err = self.w_deseada_previa - self.w_real
 
         # Phase derivatives
         dist_dot = (dist - self.prev_dist) / self.dt if self.dt > 0 else 0.0
