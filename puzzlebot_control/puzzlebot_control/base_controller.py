@@ -45,8 +45,8 @@ class BaseController(Node):
         self.tol = self.get_parameter('goal_tolerance').value
         self.wp_tol = self.get_parameter('waypoint_tolerance').value
         rate = self.get_parameter('control_rate').value
-        # Dentro de __init__
-        self.w_real = 0.0  # Velocidad angular reportada por el ESP32
+
+        self.w_real = 0.0  # Angular velocity reported by the ESP32
 
         # State
         self.x = 0.0
@@ -147,11 +147,10 @@ class BaseController(Node):
         self.get_logger().info(f'[{self.CONTROLLER_NAME}] RESET')
 
     def _esp32_cb(self, msg: JointState):
-        """Calcula la velocidad angular real del robot basada en los motores"""
+        """Calculates the actual angular velocity of the robot based on the motors"""
         if len(msg.velocity) < 2:
             return
         # w = (r * (w_derecha - w_izquierda)) / L
-        # Asumiendo: velocity[0]=izq, velocity[1]=der (según tu código de ESP32)
         w_L = msg.velocity[0]
         w_R = msg.velocity[1]
         
